@@ -5,11 +5,8 @@
 
 #define _STATE_INITIAL 0x00000000
 #define STATE_FORWARD ((unsigned long)1)
-#define STATE_SEARCH ((unsigned long)2)
-#define STATE_INIT ((unsigned long)3)
-#define STATE_WAIT ((unsigned long)4)
-#define STATE_TURN ((unsigned long)5)
-#define STATE_BACK ((unsigned long)6)
+#define STATE_INIT ((unsigned long)2)
+#define STATE_STOP ((unsigned long)3)
 
 class PreController;
 
@@ -28,8 +25,6 @@ class LEDTank{
   int cnt;
   int time;
   int state;
-  float ranging;
-  int trycount;
 };
 
 #endif
