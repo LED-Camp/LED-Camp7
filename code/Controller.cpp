@@ -14,9 +14,10 @@ Controller* Controller::getInstance(void) {
 }
 
 Controller::Controller(void) {
+#ifdef EXPERIMENTAL_USE
     netMqtt = CNetMqtt::getInstance();
     netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
-
+#endif
     position = Position::getInstance(17, 27);
 
     rangingSensor = RangingSensor::getInstance();
@@ -51,13 +52,13 @@ float Controller::getRanging(void) {
 void Controller::getNextScoreTable(int nextScoreTable[4]) {
     char payload[255];
 
-    // ƒƒbƒZ[ƒWŽæ“¾
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
     netMqtt.getContent(payload,sizeof(payload));
 
-    // ƒƒbƒZ[ƒW‚Ì‰ðÍ
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è§£æž
     score->ParsePayload(payload);
 
-    // ƒXƒRƒA‚ÌŽæ“¾‚ÆƒŠƒ^[ƒ“
+    // ã‚¹ã‚³ã‚¢ã®å–å¾—ã¨ãƒªã‚¿ãƒ¼ãƒ³
     score->getNextScoreTable(nextScoreTable);
 }
 
@@ -69,3 +70,4 @@ int Controller::subscrTopic(void) {
 int Controller::dequeueMessage(void) {
     return netMqtt.dequeueMessage(&enMsg);
 }
+

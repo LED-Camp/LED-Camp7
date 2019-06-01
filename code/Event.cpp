@@ -14,6 +14,7 @@
 
 #define ABS_FLOAT(a) ((a) < 0.0F?(a)*-1.0F:(a))
 
+
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;
@@ -58,7 +59,7 @@ char getch() {
     old.c_lflag |= ECHO;
     if (tcsetattr(0, TCSADRAIN, &old) < 0)
         perror("tcsetattr ~ICANON");
-    //  printf("%c\n",buf);
+    printf("%c\n",buf);
     return buf;
 }
 
@@ -163,7 +164,7 @@ int Event::updateEvent() {
         this->event &= ~E_REACH;
     }
 
-    //printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
+    printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
 
     this->distanceOld = distance;
     this->angleOld = angle;
