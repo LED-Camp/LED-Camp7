@@ -22,18 +22,18 @@ LIBS		+= -lVL53L0X_Rasp
 .PHONY: production
 production: $(OBJS) $(TARGET)
 $(TARGET): $(OBJS)
-	$(CXX) -L../VL53L0X_rasp/bin -o $@ $(OBJS) $(LIBS)
+	$(CXX) -g -L../VL53L0X_rasp/bin -o $@ $(OBJS) $(LIBS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CXX)  $(CFLAGS) $(INCLUDES) -o $@ -c $< 
+	$(CXX)  -g $(CFLAGS) $(INCLUDES) -o $@ -c $< 
 
 
 .PHONY: experiment
 experiment: $(OBJS_EX) $(TARGET_EX)
 	rm -rf $(OBJS_EX)
 $(TARGET_EX): $(OBJS_EX)
-	$(CXX) -L../VL53L0X_rasp/bin -o $@ $(OBJS_EX) $(LIBS)
+	$(CXX) -g -L../VL53L0X_rasp/bin -o $@ $(OBJS_EX) $(LIBS)
 $(OBJDIR)/%_ex.o: $(SRCDIR)/%.cpp
-	$(CXX) -D 'EXPERIMENTAL_USE' $(CFLAGS) $(INCLUDES) -o $@ -c $<  
+	$(CXX) -g -D 'EXPERIMENTAL_USE' $(CFLAGS) $(INCLUDES) -o $@ -c $<  
 
 .PHONY: clean
 clean:

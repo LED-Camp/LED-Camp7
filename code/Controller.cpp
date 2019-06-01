@@ -14,10 +14,13 @@ Controller* Controller::getInstance(void) {
 }
 
 Controller::Controller(void) {
-#ifdef EXPERIMENTAL_USE
+#ifndef EXPERIMENTAL_USE
+    // netMqtt = CNetMqtt::getInstance();
+    // netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
+#endif
     netMqtt = CNetMqtt::getInstance();
     netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
-#endif
+
     position = Position::getInstance(17, 27);
 
     rangingSensor = RangingSensor::getInstance();
@@ -37,7 +40,9 @@ void Controller::reset(void) {
 }
 
 void Controller::getPosition(float* distance, float* angle) {
+    printf("pos1\n");
     position->getPosition(distance, angle);
+    printf("pos2\n");
 }
 
 

@@ -164,7 +164,7 @@ int Event::updateEvent() {
         this->event &= ~E_REACH;
     }
 
-    printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
+    //printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
 
     this->distanceOld = distance;
     this->angleOld = angle;

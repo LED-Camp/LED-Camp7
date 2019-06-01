@@ -95,15 +95,14 @@ void Position::getPosition(float* distance, float* angle) {
     float r;
 
     float distanceTemp;
-
     l = countA * COUNT_TO_M;
     r = countB * COUNT_TO_M;
 
     distanceTemp = (l + r) / 2.0;
 
     *angle = ((l - r) / L) * 180.0 / 3.141592653589793F;
-    *distance = distanceTemp;
 
+    *distance = distanceTemp;
 }
 
 void Position::setDir(int indirA, int indirB) {
