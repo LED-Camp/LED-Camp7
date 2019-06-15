@@ -6,7 +6,7 @@
 #include "Controller.h"
 
 #include "LEDTank.h"
-
+#define printf(...)
 
 int main(void){
   struct timeval now;
@@ -33,20 +33,24 @@ int main(void){
     gettimeofday(&old, NULL);
 
   while(true){
+
     while((now.tv_sec - old.tv_sec) + (now.tv_usec - old.tv_usec)*1.0E-6  < 0.05F){
       gettimeofday(&now, NULL);
     }
     old = now;
+
     if(event->updateEvent() < 0){
         printf("STOP\n");
+
         controller->changeDriveMode(STOP, 0);
+
         break;
      }
-     
+
 
 #ifndef EXPERIMENTAL_USE
-     lEDTank->execState();
-     lEDTank->doTransition(event->getEvent());
+    lEDTank->execState();
+    lEDTank->doTransition(event->getEvent());
 #else
      lEDTank->execState_for_experiment();
      lEDTank->doTransition_for_experiment(event->getEvent());

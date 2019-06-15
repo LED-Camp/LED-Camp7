@@ -95,6 +95,7 @@ void Position::getPosition(float* distance, float* angle) {
     float r;
 
     float distanceTemp;
+    
     l = countA * COUNT_TO_M;
     r = countB * COUNT_TO_M;
 

@@ -1,0 +1,82 @@
+<%def getClasses(){return u.classes.findAll{it.stereotypes.length==0}}%>\
+#include <iostream>
+#include <sys/time.h>
+#include <time.h>
+#include "wiringPi.h"
+#include "Event.h"
+#include "Controller.h"
+
+<% for(c in getClasses()){ %>\
+#include "${c.name}.h"
+<%}%>
+
+int main(void){
+  struct timeval now;
+  struct timeval old;
+
+  char c;
+
+  Controller *controller;
+  Event *event;
+  
+<% for(c in getClasses()){ %>\
+  ${c.name} *${u.getInstanceName(c)};
+<%}%>\
+
+  if( wiringPiSetupGpio() < 0){ //initialize failed
+    return 1;
+  }
+  
+#ifdef EXPERIMENTAL_USE
+    printf("Experimental use mode; w:↑, a:←, s:↓, d:→\\n");
+#endif
+
+  controller = Controller::getInstance();
+<% for(c in getClasses()){ %>\
+  ${u.getInstanceName(c)} = new ${c.name}(controller);
+<%}%>\
+  event = new Event(controller);
+  gettimeofday(&now, NULL);
+  gettimeofday(&old, NULL);
+
+  while(true){
+    while((now.tv_sec - old.tv_sec) + (now.tv_usec - old.tv_usec)*1.0E-6  < 0.05F){
+      gettimeofday(&now, NULL);
+    }
+    old = now;
+    if(event->updateEvent() < 0){
+        printf("STOP\\n");
+        controller->changeDriveMode(STOP, 0);
+        break;
+     }
+     
+
+
+#ifndef EXPERIMENTAL_USE
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->execState();
+<%}%>\
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->doTransition(event->getEvent());
+<%}%>\
+#else
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->execState_for_experiment();
+<%}%>\
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->doTransition_for_experiment(event->getEvent());
+<%}%>\
+#endif
+  }
+  gettimeofday(&now, NULL);
+  gettimeofday(&old, NULL);
+  
+  while((now.tv_sec - old.tv_sec) + (now.tv_usec - old.tv_usec)*1.0E-6  < 0.05F){
+    gettimeofday(&now, NULL);
+  }
+  getch();
+<% for(c in getClasses()){ %>\
+  delete ${u.getInstanceName(c)};
+<%}%>\
+  delete event;
+}

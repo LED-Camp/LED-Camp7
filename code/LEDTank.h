@@ -13,12 +13,11 @@
 #define STATE_BACKWARD ((unsigned long)6)
 #endif
 #ifndef EXPERIMENTAL_USE
-#define _STATE_INITIAL 0x00000000
 #define STATE_FORWARD ((unsigned long)1)
 #define STATE_STOP ((unsigned long)2)
 #define STATE_TURN ((unsigned long)3)
 #endif
-class PreController;
+class Controller;
 
 class LEDTank{
  public:

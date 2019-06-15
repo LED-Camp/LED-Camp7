@@ -13,7 +13,6 @@ class Score;
 class Controller {
 private:
     TwinWheelDriver *twinWheelDriver;
-    Position *position;
     RangingSensor *rangingSensor;
     CNetMqtt netMqtt;
     Score *score;
@@ -24,11 +23,12 @@ protected:
     Controller(void);
     ~Controller(void);
 
+
 public:
     static Controller* _instance;
 
     static Controller* getInstance(void);
-
+    Position *position;
     // Positionån
     void reset(void);
     void getPosition(float* distance, float* angle);

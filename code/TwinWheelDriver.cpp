@@ -2,7 +2,7 @@
 #include "Motor.h"
 #include "Position.h"
 #include "UserDefine.h"
-
+#include <stdio.h>
 TwinWheelDriver* TwinWheelDriver::_instance = 0;
 
 TwinWheelDriver* TwinWheelDriver::getInstance(int pin1A, int pin1B, int pin2A,
@@ -24,7 +24,7 @@ void TwinWheelDriver::changeDriveMode(Mode mode, int voltage_level, Position* po
     //voltage_level : 0`100
     double r = ((double) voltage_level) * R_MOTOR_COFF / 100.0;
     double l = ((double) voltage_level) * L_MOTOR_COFF / 100.0;
-
+    
     if (mode == STOP) {
         motorL->pwmWrite(0.0);
         motorR->pwmWrite(0.0);
