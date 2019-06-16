@@ -14,18 +14,18 @@ Controller* Controller::getInstance(void) {
 }
 
 Controller::Controller(void) {
-#ifndef EXPERIMENTAL_USE
     // netMqtt = CNetMqtt::getInstance();
     // netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
-#endif
-    // netMqtt = CNetMqtt::getInstance();
-    // netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
-    
+
     position = Position::getInstance(17, 27);
+    lineSensor = LineSensor::getInstance(10, 9, 11);
+
     rangingSensor = RangingSensor::getInstance();
     rangingSensor->Initialize();
 
     twinWheelDriver = TwinWheelDriver::getInstance(13, 19, 5, 6);
+
+    
 
     score = new Score();
 }
@@ -51,16 +51,21 @@ float Controller::getRanging(void) {
     return rangingSensor->getRanging();
 }
 
+void Controller::getLineValue(bool* left, bool* center, bool* right){
+    lineSensor->getLineValue(left, center, right);
+}
+    
+
 void Controller::getNextScoreTable(int nextScoreTable[4]) {
     char payload[255];
 
-    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å–å¾—
+    // ƒƒbƒZ[ƒWŽæ“¾
     netMqtt.getContent(payload,sizeof(payload));
 
-    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è§£æž
+    // ƒƒbƒZ[ƒW‚Ì‰ðÍ
     score->ParsePayload(payload);
 
-    // ã‚¹ã‚³ã‚¢ã®å–å¾—ã¨ãƒªã‚¿ãƒ¼ãƒ³
+    // ƒXƒRƒA‚ÌŽæ“¾‚ÆƒŠƒ^[ƒ“
     score->getNextScoreTable(nextScoreTable);
 }
 
@@ -72,4 +77,3 @@ int Controller::subscrTopic(void) {
 int Controller::dequeueMessage(void) {
     return netMqtt.dequeueMessage(&enMsg);
 }
-

@@ -7,6 +7,8 @@
 #include "TwinWheelDriver.h"
 #include "Position.h"
 #include "CNetMqtt.h"
+#include "LineSensor.h"
+
 
 class Score;
 
@@ -15,6 +17,7 @@ private:
     TwinWheelDriver *twinWheelDriver;
     RangingSensor *rangingSensor;
     CNetMqtt netMqtt;
+    LineSensor *lineSensor;
     Score *score;
 
     enMsgId_t enMsg;
@@ -36,6 +39,9 @@ public:
     // twinWheelDriver系
     void changeDriveMode(Mode mode, int voltage_level);
 
+    // LineSensor系
+    void getLineValue(bool* left, bool* center, bool* right);
+   
     // RangingSensor系
     float getRanging(void);
 

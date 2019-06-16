@@ -97,6 +97,7 @@ int Event::updateEvent() {
 
     float rangingDistance;
 
+    bool left, center, right;
 
     if (kbhit()) {
         c = getchar();
@@ -109,7 +110,7 @@ int Event::updateEvent() {
     controller->getPosition(&distance, &angle);
     absDistanceDiff = ABS_FLOAT(this->distanceOld - distance);
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
-
+    controller->getLineValue(&left, &center, &right);
     rangingDistance = controller->getRanging();
     if(rangingDistance != this->rangingDistanceOld){
       this->event |= E_CHANGE_RANGING;
@@ -165,7 +166,7 @@ int Event::updateEvent() {
     //     this->event &= ~E_REACH;
     // }
 
-    printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
+    printf("distance=%f, angle=%f, ranging=%f, line_left=%d, line_center=%d, line_right=%d\n", distance, angle, rangingDistance, left, center, right);
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
