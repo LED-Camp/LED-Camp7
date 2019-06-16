@@ -14,6 +14,7 @@
 
 #define ABS_FLOAT(a) ((a) < 0.0F?(a)*-1.0F:(a))
 
+
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;
@@ -58,7 +59,7 @@ char getch() {
     old.c_lflag |= ECHO;
     if (tcsetattr(0, TCSADRAIN, &old) < 0)
         perror("tcsetattr ~ICANON");
-    //  printf("%c\n",buf);
+    printf("%c\n",buf);
     return buf;
 }
 
@@ -96,8 +97,9 @@ int Event::updateEvent() {
 
     float rangingDistance;
 
+
     if (kbhit()) {
-        c = getch();
+        c = getchar();
     }
 
     if(c == 'q'){
@@ -144,27 +146,26 @@ int Event::updateEvent() {
         this->event &= ~E_RIGHT;
     }
 
-    if (absDistanceDiff > 0.005) {
-        this->event |= E_CHANGE_DISTANCE;
-    } else {
-        this->event &= ~E_CHANGE_DISTANCE;
-    }
+    // if (absDistanceDiff > 0.005) {
+    //     this->event |= E_CHANGE_DISTANCE;
+    // } else {
+    //     this->event &= ~E_CHANGE_DISTANCE;
+    // }
 
-    if (absAngleDiff > 0.01) {
-        this->event |= E_CHANGE_ANGLE;
-    } else {
-        this->event &= ~E_CHANGE_ANGLE;
-    }
+    // if (absAngleDiff > 0.01) {
+    //     this->event |= E_CHANGE_ANGLE;
+    // } else {
+    //     this->event &= ~E_CHANGE_ANGLE;
+    // }
 
-    if((controller->subscrTopic() == RET_SUCCESS) &&
-       (controller->dequeueMessage() != RET_FAILED)){
-         this->event |= E_REACH;
-    }else{
-        this->event &= ~E_REACH;
-    }
+    // if((controller->subscrTopic() == RET_SUCCESS) &&
+    //    (controller->dequeueMessage() != RET_FAILED)){
+    //      this->event |= E_REACH;
+    // }else{
+    //     this->event &= ~E_REACH;
+    // }
 
-    //printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
-
+    printf("distance=%f, angle=%f, ranging=%f\n", distance, angle, rangingDistance);
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;

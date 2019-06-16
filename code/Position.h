@@ -7,8 +7,9 @@
 
 class Position {
 private:
-    const float COUNT_TO_M = 3.73F * 3.1415926535897932384626433F / 58.0F
-            / 8.0F;
+    /* const float COUNT_TO_M = 3.73F * 3.1415926535897932384626433F / 58.0F */
+    /*         / 8.0F; */
+    const float COUNT_TO_M = 0.019F;
     const float L = 9.0F;  //9cm
     float angle;
     float distance;
