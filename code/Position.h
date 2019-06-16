@@ -13,6 +13,7 @@ private:
     const float L = 9.0F;  //9cm
     float angle;
     float distance;
+    
 
 protected:
     Position(int pinA, int pinB);
