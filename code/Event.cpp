@@ -1,6 +1,6 @@
 /**
  * @file Event.cpp
- * @brief ƒCƒxƒ“ƒgŠÇ—
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆç®¡ç†
  * @author Naoki Okayama
  * @date 2017/06/28
  */
@@ -67,7 +67,7 @@ char getch() {
 // public
 //////////////////////////////////////////////////////////
 /**
- * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ * @brief ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
  * @param -
  * @return -
  * @sa -
@@ -82,7 +82,7 @@ Event::Event(Controller *controller) :
 }
 
 /**
- * @brief ƒCƒxƒ“ƒg‚ğXV‚·‚é
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ›´æ–°ã™ã‚‹
  * @parame -
  * @return -
  * @sa -
@@ -119,28 +119,28 @@ int Event::updateEvent() {
     }
 
 
-    // E_UPƒCƒxƒ“ƒg”»’è
+    // E_UPã‚¤ãƒ™ãƒ³ãƒˆåˆ¤å®š
     if (c == 'w') {
         this->event |= E_UP;
     } else {
         this->event &= ~E_UP;
     }
 
-    // E_DOWNƒCƒxƒ“ƒg”»’è
+    // E_DOWNã‚¤ãƒ™ãƒ³ãƒˆåˆ¤å®š
     if (c == 's') {
         this->event |= E_DOWN;
     } else {
         this->event &= ~E_DOWN;
     }
 
-    // E_LEFTƒCƒxƒ“ƒg”»’è
+    // E_LEFTã‚¤ãƒ™ãƒ³ãƒˆåˆ¤å®š
     if (c == 'a') {
         this->event |= E_LEFT;
     } else {
         this->event &= ~E_LEFT;
     }
 
-    // E_RIGHTƒCƒxƒ“ƒg”»’è
+    // E_RIGHTã‚¤ãƒ™ãƒ³ãƒˆåˆ¤å®š
     if (c == 'd') {
         this->event |= E_RIGHT;
     } else {
@@ -175,9 +175,9 @@ int Event::updateEvent() {
 }
 
 /**
- * @brief ƒCƒxƒ“ƒg‚ğæ“¾‚·‚é
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹
  * @parame -
- * @return ƒCƒxƒ“ƒg
+ * @return ã‚¤ãƒ™ãƒ³ãƒˆ
  * @sa -
  */
 unsigned long Event::getEvent() {

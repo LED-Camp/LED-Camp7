@@ -1,13 +1,13 @@
 #ifndef __USER_DEFINE__
 #define __USER_DEFINE__
 
-// 右モータ補正値[%]
+// 蜿ｳ繝｢繝ｼ繧ｿ陬懈ｭ｣蛟､[%]
 #define R_MOTOR_COFF ((double)100.0)
 
-// 左モータ補正値[%]
+// 蟾ｦ繝｢繝ｼ繧ｿ陬懈ｭ｣蛟､[%]
 #define L_MOTOR_COFF ((double)100.0)
 
-// コースIPアドレス
+// 繧ｳ繝ｼ繧ｹIP繧｢繝峨Ξ繧ｹ
 #define COURSE_IP_ADDR "192.168.20.111"
 
 

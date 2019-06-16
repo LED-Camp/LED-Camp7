@@ -42,12 +42,14 @@ void LEDTank::doTransition(unsigned long event){
     case STATE_FORWARD:
         if(((event & E_CHANGE_ANGLE) != 0) && (this->distance > 10)){
             // exit
+
       
 
             //action
       
 
             this->state = STATE_TURN;
+
 
             //entry
             controller->changeDriveMode(CW, 60);
@@ -57,12 +59,14 @@ void LEDTank::doTransition(unsigned long event){
     case STATE_STOP:
         if(((event & E_UP) != 0) ){
             // exit
+
       
 
             //action
       
 
             this->state = STATE_FORWARD;
+
 
             //entry
             controller->changeDriveMode(FORWARD, 60);
@@ -72,6 +76,7 @@ void LEDTank::doTransition(unsigned long event){
     case STATE_TURN:
         if(((event & E_CHANGE_ANGLE) != 0) ){
             // exit
+
       
 
             //action
