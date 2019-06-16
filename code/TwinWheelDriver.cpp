@@ -21,7 +21,7 @@ TwinWheelDriver::TwinWheelDriver(int pin1A, int pin1B, int pin2A, int pin2B) {
 }
 
 void TwinWheelDriver::changeDriveMode(Mode mode, int voltage_level, Position* position) {
-    //voltage_level : 0Å`100
+    //voltage_level : 0„Äú100
     double r = ((double) voltage_level) * R_MOTOR_COFF / 100.0;
     double l = ((double) voltage_level) * L_MOTOR_COFF / 100.0;
     

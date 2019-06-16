@@ -29,17 +29,17 @@ public:
 
     static Controller* getInstance(void);
     Position *position;
-    // PositionŒn
+    // Positionç³»
     void reset(void);
     void getPosition(float* distance, float* angle);
 
-    // twinWheelDriverŒn
+    // twinWheelDriverç³»
     void changeDriveMode(Mode mode, int voltage_level);
 
-    // RangingSensorŒn
+    // RangingSensorç³»
     float getRanging(void);
 
-    // CourseŒn
+    // Courseç³»
     void getNextScoreTable(int nextScoreTable[4]);
     int subscrTopic(void);
     int dequeueMessage(void);
