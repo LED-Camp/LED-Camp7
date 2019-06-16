@@ -39,7 +39,7 @@ void LEDTank::doTransition(unsigned long event){
 printf("STOP\n");
 
     break;
-  }
+
   case STATE_FORWARD:
     if(((event & E_CHANGE_ANGLE) != 0) && (this->distance > 10)){
       // exit
