@@ -1,6 +1,6 @@
 /**
  * @file PreEvent.h
- * @brief ƒCƒxƒ“ƒgŠÇ—
+ * @brief ã‚¤ãƒ™ãƒ³ãƒˆç®¡ç†
  * @author Naoki Okayama
  * @date 2017/06/28
  */
