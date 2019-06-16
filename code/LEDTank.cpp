@@ -39,7 +39,7 @@ void LEDTank::doTransition(unsigned long event){
 printf("STOP\n");
 
     break;
-  }
+
   case STATE_FORWARD:
     if(((event & E_CHANGE_ANGLE) != 0) && (this->distance > 10)){
       // exit
@@ -51,7 +51,7 @@ printf("STOP\n");
       this->state = STATE_TURN;
 
       //entry
-      controller->changeDriveMode(CW, 5);
+      controller->changeDriveMode(CW, 60);
 printf("CW\n");
     }
     break;
@@ -66,7 +66,7 @@ printf("CW\n");
       this->state = STATE_FORWARD;
 
       //entry
-      controller->changeDriveMode(FORWARD, 5);
+      controller->changeDriveMode(FORWARD, 60);
 printf("FORWARD\n");
     }
     break;
