@@ -14,5 +14,12 @@
 //BH1745NUC_CLEAR_DATA_LSB
 //BH1745NUC_CLEAR_DATA_MSB
 //:
+#define BH1745NUC_INTERRUPT         0x60
+#define BH1745NUC_PERSISTENCE       0x61
+#define BH1745NUC_TH_LSB            0x62
+#define BH1745NUC_TH_MSB            0x63
+#define BH1745NUC_TL_LSB            0x64
+#define BH1745NUC_TL_MSB            0x65
+#define BH1745NUC_MANUFACTURER_ID   0x92
 
 #endif // _BH1745NUC_REG_

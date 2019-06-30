@@ -6,11 +6,10 @@
 #include <errno.h>
 
 #include "bh1745nuc.h"
-#include "bh1745nuc_reg.h"
 
 #include <stdio.h>
 
-#define BH1745NUC_DEVICE_ADDRESS 0x39
+#define BH1745NUC_DEVICE_ADDRESS 0x38
 
 static int fd;
 
@@ -46,6 +45,17 @@ int32_t bh1745nuc_init(void)
     return 0;
 }
 
+
+int32_t bh1745nuc_write_byte(uint8_t addr, uint8_t val)
+{
+    uint8_t data[2] = {0};
+
+    data[0] = addr;
+    data[1] = val;
+    write(fd, data, 2);
+
+    return 0;
+}
 
 int32_t bh1745nuc_get_val(uint16_t * r, uint16_t * g, uint16_t * b, uint16_t * c)
 {
