@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include "CommonDefine.h"
+#include "ColorSensor.h"
 #include "RangingSensor.h"
 #include "TwinWheelDriver.h"
 #include "Position.h"
@@ -15,6 +16,7 @@ class Score;
 class Controller {
 private:
     TwinWheelDriver *twinWheelDriver;
+    ColorSensor *colorSensor;
     RangingSensor *rangingSensor;
     CNetMqtt netMqtt;
     LineSensor *lineSensor;
@@ -41,10 +43,12 @@ public:
 
     // LineSensor系
     void getLineValue(bool* left, bool* center, bool* right);
-   
+    
     // RangingSensor系
     float getRanging(void);
 
+    void getColorValue(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t* clear);
+    
     // Course系
     void getNextScoreTable(int nextScoreTable[4]);
     int subscrTopic(void);
