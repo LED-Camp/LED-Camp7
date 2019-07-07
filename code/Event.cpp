@@ -97,7 +97,7 @@ int Event::updateEvent() {
 
     float rangingDistance;
 
-    bool left, center, right;
+    bool lineLeft, lineCenter, lineRight;
 
     if (kbhit()) {
         c = getchar();
@@ -110,7 +110,7 @@ int Event::updateEvent() {
     controller->getPosition(&distance, &angle);
     absDistanceDiff = ABS_FLOAT(this->distanceOld - distance);
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
-    controller->getLineValue(&left, &center, &right);
+    controller->getLineValue(&lineLeft, &lineCenter, &lineRight);
     rangingDistance = controller->getRanging();
     if(rangingDistance != this->rangingDistanceOld){
       this->event |= E_CHANGE_RANGING;
@@ -147,6 +147,16 @@ int Event::updateEvent() {
         this->event &= ~E_RIGHT;
     }
 
+    // E_LINEイベント判定
+    if (this->lineLeftOld != lineLeft
+          this->lineCenterOld != lineCenter
+          this->lineRightOld != lineRight) {
+        this->event |= E_LINE;
+    } else {
+        this->event &= ~E_LINE;
+    }
+
+
     // if (absDistanceDiff > 0.005) {
     //     this->event |= E_CHANGE_DISTANCE;
     // } else {
@@ -166,10 +176,13 @@ int Event::updateEvent() {
     //     this->event &= ~E_REACH;
     // }
 
-    printf("distance=%f, angle=%f, ranging=%f, line_left=%d, line_center=%d, line_right=%d\n", distance, angle, rangingDistance, left, center, right);
+    printf("distance=%f, angle=%f, ranging=%f, line_left=%d, line_center=%d, line_right=%d\n", distance, angle, rangingDistance, lineLeft, lineCenter, lineRight);
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
+    this->lineLeftOld = lineLeft;
+    this->lineCenterOld = lineCenter;
+    this->lineRightOld = lineRight;
 
     return 0;
 }
