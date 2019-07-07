@@ -20,6 +20,9 @@ Controller::Controller(void) {
     position = Position::getInstance(17, 27);
     lineSensor = LineSensor::getInstance(10, 9, 11);
 
+    colorSensor = ColorSensor::getInstance();
+    colorSensor->Initialize();
+    
     rangingSensor = RangingSensor::getInstance();
     rangingSensor->Initialize();
 
@@ -48,7 +51,11 @@ void Controller::changeDriveMode(Mode mode, int voltage_level) {
 }
 
 float Controller::getRanging(void) {
-    return rangingSensor->getRanging();
+  return rangingSensor->getRanging();
+}
+
+void Controller::getColorValue(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t* clear) {
+    colorSensor->getColor(red, green, blue, clear);
 }
 
 void Controller::getLineValue(bool* left, bool* center, bool* right){
