@@ -115,10 +115,20 @@ int Event::updateEvent() {
     controller->getLineValue(&left, &center, &right);
     controller->getColorValue(&red, &green, &blue, &clear);
     rangingDistance = controller->getRanging();
+
     if(rangingDistance != this->rangingDistanceOld){
       this->event |= E_CHANGE_RANGING;
     }else{
       this->event &= ~E_CHANGE_RANGING;
+    }
+
+    if(red   != this->redOld   ||
+       green != this->greenOld ||
+       blue  != this->blueOld
+       ){
+      this->event |= E_CHANGE_COLOR;
+    }else{
+      this->event &= ~E_CHANGE_COLOR;
     }
 
 
@@ -150,17 +160,17 @@ int Event::updateEvent() {
         this->event &= ~E_RIGHT;
     }
 
-    // if (absDistanceDiff > 0.005) {
-    //     this->event |= E_CHANGE_DISTANCE;
-    // } else {
-    //     this->event &= ~E_CHANGE_DISTANCE;
-    // }
+    if (absDistanceDiff > 0.005) {
+        this->event |= E_CHANGE_DISTANCE;
+    } else {
+        this->event &= ~E_CHANGE_DISTANCE;
+    }
 
-    // if (absAngleDiff > 0.01) {
-    //     this->event |= E_CHANGE_ANGLE;
-    // } else {
-    //     this->event &= ~E_CHANGE_ANGLE;
-    // }
+    if (absAngleDiff > 0.01) {
+        this->event |= E_CHANGE_ANGLE;
+    } else {
+        this->event &= ~E_CHANGE_ANGLE;
+    }
 
     // if((controller->subscrTopic() == RET_SUCCESS) &&
     //    (controller->dequeueMessage() != RET_FAILED)){
@@ -174,6 +184,9 @@ int Event::updateEvent() {
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
+    this->redOld = red;
+    this->greenOld = green;
+    this->blueOld = blue;
 
     return 0;
 }
