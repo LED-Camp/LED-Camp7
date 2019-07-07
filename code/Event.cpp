@@ -148,8 +148,8 @@ int Event::updateEvent() {
     }
 
     // E_LINEイベント判定
-    if (this->lineLeftOld != lineLeft
-          this->lineCenterOld != lineCenter
+    if (this->lineLeftOld != lineLeft ||
+          this->lineCenterOld != lineCenter ||
           this->lineRightOld != lineRight) {
         this->event |= E_LINE;
     } else {
