@@ -4,19 +4,25 @@
 #include <stdio.h>
 #include "Event.h"
 #include "${u.name}.h"
+#include <unistd.h>
 
 ${u.name}::${u.name}(Controller *controller){
   this->state = _STATE_INITIAL;
   this->controller = controller;
+
+#ifdef EXPERIMENTAL_USE
+  this->state = _STATE_INITIAL;
+  this->controller = controller;
   this->distance = 0;
   this->angle = 0;
-
+#else
 
 <% for(var in u.iclass.getAttributes()){%>\
 <% if(var.getAssociation() == null){%>\
   this->${var.getName()} = 0;
 <%}%>\
 <%}%>\
+#endif
 }
 
 #ifndef EXPERIMENTAL_USE
