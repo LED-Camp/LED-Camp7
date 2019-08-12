@@ -11,8 +11,6 @@ ${u.name}::${u.name}(Controller *controller){
   this->controller = controller;
 
 #ifdef EXPERIMENTAL_USE
-  this->state = _STATE_INITIAL;
-  this->controller = controller;
   this->distance = 0;
   this->angle = 0;
 #else
