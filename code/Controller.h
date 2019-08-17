@@ -48,6 +48,7 @@ public:
     float getRanging(void);
 
     void getColorValue(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t* clear);
+    void getColor(uint16_t red, uint16_t green, uint16_t blue, uint16_t* color);
     
     // Course系
     void getNextScoreTable(int nextScoreTable[4]);

@@ -55,7 +55,11 @@ float Controller::getRanging(void) {
 }
 
 void Controller::getColorValue(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t* clear) {
-    colorSensor->getColor(red, green, blue, clear);
+    colorSensor->getColorValue(red, green, blue, clear);
+}
+
+void Controller::getColor(uint16_t red, uint16_t green, uint16_t blue, uint16_t* color) {
+    colorSensor->getColor(red, green, blue, color);
 }
 
 void Controller::getLineValue(bool* left, bool* center, bool* right){

@@ -12,7 +12,7 @@ int main(void){
   struct timeval now;
   struct timeval old;
 
-  char c;
+  //char c;
 
   Controller *controller;
   Event *event;

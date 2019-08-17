@@ -97,7 +97,7 @@ int Event::updateEvent() {
 
     float rangingDistance;
 
-    uint16_t red, green, blue, clear;
+    uint16_t red, green, blue, clear, color;
     
     bool left, center, right;
 
@@ -114,6 +114,7 @@ int Event::updateEvent() {
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
     controller->getLineValue(&left, &center, &right);
     controller->getColorValue(&red, &green, &blue, &clear);
+    controller->getColor(red, green, blue, &color);
     rangingDistance = controller->getRanging();
     if(rangingDistance != this->rangingDistanceOld){
       this->event |= E_CHANGE_RANGING;
@@ -169,8 +170,9 @@ int Event::updateEvent() {
     //     this->event &= ~E_REACH;
     // }
 
-    printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d\n",
-	   distance, angle, rangingDistance, red, green, blue, left, center, right);
+    //printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d\n",
+    //  distance, angle, rangingDistance, red, green, blue, left, center, right);
+    printf("r=%d,g=%d,b=%d,color=%d\n", red,green,blue,color);
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
