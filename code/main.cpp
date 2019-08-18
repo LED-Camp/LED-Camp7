@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sys/time.h>
 #include <time.h>
+#include <csignal>
 #include "wiringPi.h"
 #include "Event.h"
 #include "Controller.h"
@@ -8,16 +9,24 @@
 #include "LEDTank.h"
 #define printf(...)
 
+Controller *controller;
+
+void signalHandler(int signal) {
+    std::cout << "exit" << std::endl;
+    controller->changeDriveMode(STOP, 0);
+}
+
 int main(void){
   struct timeval now;
   struct timeval old;
 
   char c;
 
-  Controller *controller;
   Event *event;
   
   LEDTank *lEDTank;
+
+  std::signal(SIGINT, signalHandler);
 
   if( wiringPiSetupGpio() < 0){ //initialize failed
     return 1;
