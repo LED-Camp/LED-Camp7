@@ -40,7 +40,8 @@ void ColorSensor::Initialize()
     bh1745nuc_write_byte(BH1745NUC_TL_MSB, 0xFF);
 }
 
-void ColorSensor::getColor(uint16_t * r, uint16_t * g, uint16_t * b, uint16_t * c)
+void ColorSensor::getColorValue(uint16_t* r, uint16_t* g, uint16_t* b, uint16_t* c)
 {
     bh1745nuc_get_val(r, g, b, c);
 }
+

@@ -13,11 +13,16 @@
 #define STATE_BACKWARD ((unsigned long)6)
 #endif
 #ifndef EXPERIMENTAL_USE
-#define STATE_FORWARD ((unsigned long)1)
+#define _STATE_INITIAL 0x00000000
+#define STATE_SEARCH ((unsigned long)1)
 #define STATE_STOP ((unsigned long)2)
-#define STATE_TURN ((unsigned long)3)
+#define STATE_CLOSE ((unsigned long)3)
+#define STATE_HOLD ((unsigned long)4)
+#define STATE_PUSH ((unsigned long)5)
+#define STATE_PLACE ((unsigned long)6)
+#define STATE_RETURN ((unsigned long)7)
 #endif
-class Controller;
+class PreController;
 
 class LEDTank{
  public:
@@ -39,6 +44,10 @@ class LEDTank{
 #ifndef EXPERIMENTAL_USE
   float distance;
   float angle;
+  float rangingDistance;
+  bool lineL;
+  bool lineC;
+  bool lineR;
 #endif
 #ifdef EXPERIMENTAL_USE
   float distance;

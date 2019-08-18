@@ -98,6 +98,7 @@ int Event::updateEvent() {
     float rangingDistance;
 
     uint16_t red, green, blue, clear;
+    int lineSensor3bit;
     
     bool left, center, right;
 
@@ -114,7 +115,16 @@ int Event::updateEvent() {
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
     controller->getLineValue(&left, &center, &right);
     controller->getColorValue(&red, &green, &blue, &clear);
+    lineSensor3bit = left + center*2 + right*4;
     rangingDistance = controller->getRanging();
+
+    
+    if(lineSensor3bit != this->lineSensor3bitOld){
+      this->event |= E_CHANGE_LINE;
+    }else{
+      this->event &= ~E_CHANGE_LINE;
+    }
+
     if(rangingDistance != this->rangingDistanceOld){
       this->event |= E_CHANGE_RANGING;
     }else{
@@ -150,17 +160,17 @@ int Event::updateEvent() {
         this->event &= ~E_RIGHT;
     }
 
-    // if (absDistanceDiff > 0.005) {
-    //     this->event |= E_CHANGE_DISTANCE;
-    // } else {
-    //     this->event &= ~E_CHANGE_DISTANCE;
-    // }
+     if (absDistanceDiff > 0.005) {
+         this->event |= E_CHANGE_DISTANCE;
+     } else {
+         this->event &= ~E_CHANGE_DISTANCE;
+     }
 
-    // if (absAngleDiff > 0.01) {
-    //     this->event |= E_CHANGE_ANGLE;
-    // } else {
-    //     this->event &= ~E_CHANGE_ANGLE;
-    // }
+    if (absAngleDiff > 0.01) {
+        this->event |= E_CHANGE_ANGLE;
+    } else {
+        this->event &= ~E_CHANGE_ANGLE;
+    }
 
     // if((controller->subscrTopic() == RET_SUCCESS) &&
     //    (controller->dequeueMessage() != RET_FAILED)){
@@ -174,6 +184,7 @@ int Event::updateEvent() {
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
+    this->lineSensor3bitOld = lineSensor3bit;
 
     return 0;
 }
