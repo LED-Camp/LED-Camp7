@@ -34,27 +34,27 @@ int main(void){
 
   while(true){
 
-    while((now.tv_sec - old.tv_sec) + (now.tv_usec - old.tv_usec)*1.0E-6  < 0.05F){
-      gettimeofday(&now, NULL);
-    }
-    old = now;
-
-    if(event->updateEvent() < 0){
-        printf("STOP\n");
-
-        controller->changeDriveMode(STOP, 0);
-
-        break;
-     }
-
-
+    gettimeofday(&now, NULL);
+    if((now.tv_sec - old.tv_sec) + (now.tv_usec - old.tv_usec)*1.0E-6  > 0.05F){
+      old = now;
+  
+      if(event->updateEvent() < 0){
+          printf("STOP\n");
+  
+          controller->changeDriveMode(STOP, 0);
+  
+          break;
+       }
+  
+  
 #ifndef EXPERIMENTAL_USE
-    lEDTank->execState();
-    lEDTank->doTransition(event->getEvent());
+       lEDTank->execState();
+       lEDTank->doTransition(event->getEvent());
 #else
-     lEDTank->execState_for_experiment();
-     lEDTank->doTransition_for_experiment(event->getEvent());
+       lEDTank->execState_for_experiment();
+       lEDTank->doTransition_for_experiment(event->getEvent());
 #endif
+     }
   }
   gettimeofday(&now, NULL);
   gettimeofday(&old, NULL);
