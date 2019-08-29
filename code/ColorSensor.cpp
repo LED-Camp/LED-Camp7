@@ -1,5 +1,5 @@
 #include "ColorSensor.h"
-
+#include "UserDefine.h"
 #include <stdio.h>
 
 #include "bh1745nuc.h"
@@ -45,3 +45,18 @@ void ColorSensor::getColorValue(uint16_t* r, uint16_t* g, uint16_t* b, uint16_t*
     bh1745nuc_get_val(r, g, b, c);
 }
 
+void ColorSensor::getColor(uint16_t red,  uint16_t green, uint16_t blue, uint16_t * color)
+{
+  uint16_t max_value = 0;
+  uint16_t colors[3] = {red*COLOR_SENSOR_RED_COFF / 100,
+                        green*COLOR_SENSOR_GREEN_COFF / 100,
+                        blue*COLOR_SENSOR_BLUE_COFF / 100};
+
+  for(int i = 0; i < 3; i++)
+  {
+    if(colors[i] > max_value){
+      max_value = colors[i];
+      *color = i + 1;
+    }
+  }
+}
