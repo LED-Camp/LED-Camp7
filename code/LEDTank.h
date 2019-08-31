@@ -11,8 +11,8 @@
 #define STATE_LEFT ((unsigned long)4)
 #define STATE_RIGHT ((unsigned long)5)
 #define STATE_BACKWARD ((unsigned long)6)
-#endif
-#ifndef EXPERIMENTAL_USE
+
+#else
 #define _STATE_INITIAL 0x00000000
 #define STATE_SEARCH ((unsigned long)1)
 #define STATE_STOP ((unsigned long)2)
@@ -27,13 +27,12 @@ class PreController;
 class LEDTank{
  public:
   LEDTank(Controller *controller);
-#ifndef EXPERIMENTAL_USE
-  void execState();
-  void doTransition(unsigned long event);
-#endif
 #ifdef EXPERIMENTAL_USE
   void execState_for_experiment();
   void doTransition_for_experiment(unsigned long event);
+#else
+  void execState();
+  void doTransition(unsigned long event);
 #endif
   unsigned long _state;
 
@@ -41,19 +40,19 @@ class LEDTank{
    Controller *controller;
    unsigned long _beforeState;
    unsigned long state;
-#ifndef EXPERIMENTAL_USE
+#ifdef EXPERIMENTAL_USE
+  float distance;
+  float angle;
+  int cnt;
+  int time;
+
+#else
   float distance;
   float angle;
   float rangingDistance;
   bool lineL;
   bool lineC;
   bool lineR;
-#endif
-#ifdef EXPERIMENTAL_USE
-  float distance;
-  float angle;
-  int cnt;
-  int time;
 #endif
 
 };
