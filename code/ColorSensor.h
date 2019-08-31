@@ -14,7 +14,8 @@ public:
 
     static ColorSensor* getInstance();
     void Initialize();
-    void getColor(uint16_t * r, uint16_t * g, uint16_t * b, uint16_t * c);
+    void getColorValue(uint16_t * r, uint16_t * g, uint16_t * b, uint16_t * c);
+    void getColor(uint16_t red, uint16_t green, uint16_t blue, uint16_t* color);
 
 private:
     

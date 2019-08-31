@@ -73,9 +73,9 @@ char getch() {
  * @sa -
  */
 Event::Event(Controller *controller) :
-          distanceOld(0.0F),
-          angleOld(0.0F),
-          rangingDistanceOld(0){
+    distanceOld(0.0F),
+    angleOld(0.0F),
+    rangingDistanceOld(0){
 
     this->event = 0;
     this->controller = controller;
@@ -97,7 +97,8 @@ int Event::updateEvent() {
 
     float rangingDistance;
 
-    uint16_t red, green, blue, clear;
+    uint16_t red, green, blue, clear, color;
+    int lineSensor3bit;
     
     bool left, center, right;
 
@@ -106,7 +107,7 @@ int Event::updateEvent() {
     }
 
     if(c == 'q'){
-      return -1;
+        return -1;
     }
 
     controller->getPosition(&distance, &angle);
@@ -114,11 +115,27 @@ int Event::updateEvent() {
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
     controller->getLineValue(&left, &center, &right);
     controller->getColorValue(&red, &green, &blue, &clear);
+    controller->getColor(red, green, blue, &color);
+    lineSensor3bit = left + center*2 + right*4;
     rangingDistance = controller->getRanging();
-    if(rangingDistance != this->rangingDistanceOld){
-      this->event |= E_CHANGE_RANGING;
+    
+    
+    if(lineSensor3bit != this->lineSensor3bitOld){
+        this->event |= E_CHANGE_LINE;
     }else{
-      this->event &= ~E_CHANGE_RANGING;
+        this->event &= ~E_CHANGE_LINE;
+    }
+
+    if(rangingDistance != this->rangingDistanceOld){
+        this->event |= E_CHANGE_RANGING;
+    }else{
+        this->event &= ~E_CHANGE_RANGING;
+    }
+    if(color != this->colorOld){
+        this->event |= E_CHANGE_COLOR;
+    }else{
+
+        this->event &= ~E_CHANGE_COLOR;
     }
 
 
@@ -150,17 +167,17 @@ int Event::updateEvent() {
         this->event &= ~E_RIGHT;
     }
 
-    // if (absDistanceDiff > 0.005) {
-    //     this->event |= E_CHANGE_DISTANCE;
-    // } else {
-    //     this->event &= ~E_CHANGE_DISTANCE;
-    // }
+    if (absDistanceDiff > 0.005) {
+        this->event |= E_CHANGE_DISTANCE;
+    } else {
+        this->event &= ~E_CHANGE_DISTANCE;
+    }
 
-    // if (absAngleDiff > 0.01) {
-    //     this->event |= E_CHANGE_ANGLE;
-    // } else {
-    //     this->event &= ~E_CHANGE_ANGLE;
-    // }
+    if (absAngleDiff > 0.01) {
+        this->event |= E_CHANGE_ANGLE;
+    } else {
+        this->event &= ~E_CHANGE_ANGLE;
+    }
 
     // if((controller->subscrTopic() == RET_SUCCESS) &&
     //    (controller->dequeueMessage() != RET_FAILED)){
@@ -169,11 +186,13 @@ int Event::updateEvent() {
     //     this->event &= ~E_REACH;
     // }
 
-    printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d\n",
-	   distance, angle, rangingDistance, red, green, blue, left, center, right);
+    //printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d,color=%d\n",
+           distance, angle, rangingDistance, red, green, blue, left, center, right, color);
     this->distanceOld = distance;
     this->angleOld = angle;
     this->rangingDistanceOld = rangingDistance;
+    this->lineSensor3bitOld = lineSensor3bit;
+    this->colorOld = color;
 
     return 0;
 }

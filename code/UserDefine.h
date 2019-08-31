@@ -10,5 +10,8 @@
 // コースIPアドレス
 #define COURSE_IP_ADDR "192.168.20.111"
 
-
+// カラーセンサー補正値[%]
+#define COLOR_SENSOR_RED_COFF ((double)100.0)
+#define COLOR_SENSOR_GREEN_COFF ((double)50.0)
+#define COLOR_SENSOR_BLUE_COFF ((double)100.0)
 #endif

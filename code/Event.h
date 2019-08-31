@@ -21,11 +21,11 @@ class Controller;
 #define E_CHANGE_ANGLE ((unsigned long)0x00000020)
 #define E_CHANGE_RANGING ((unsigned long)0x00000040)
 #define E_REACH ((unsigned long)0x00000080)
+#define E_CHANGE_LINE ((unsigned long)0x00000100)
+#define E_CHANGE_COLOR ((unsigned long)0x00000200)
+#define TRUE ((unsigned long)0xFFFFFFFF)
+#define FALSE ((unsigned long)0x00000000)
 
-#if 0
-#define TRUE (1)
-#define FALSE (0)
-#endif
 
 extern int kbhit(void);
 extern char getch(void);
@@ -43,6 +43,8 @@ private:
     float distanceOld;
     float angleOld;
     uint16_t rangingDistanceOld;
+    int lineSensor3bitOld;
+    uint16_t colorOld;
 };
 
 #endif
