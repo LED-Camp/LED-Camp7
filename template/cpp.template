@@ -22,57 +22,6 @@ ${u.name}::${u.name}(Controller *controller){
 <%}%>\
 #endif
 }
-
-#ifndef EXPERIMENTAL_USE
-void ${u.name}::execState(){
-  switch(this->state){
-<% for(state in u.states){ %>\
-  case STATE_${state.name}:
-    ${state.doActivity}
-    break;
-<% } %>\
-  default:
-    break;
-  }
-}
-void ${u.name}::doTransition(unsigned long event){
-  this->_beforeState = this->state;
-
-  switch(this->state){
-  case _STATE_INITIAL:
-    this->state = STATE_${u.initialState};
-
-    //entry
-    ${u.initialState.entry}
-
-    break;  
-<% for(state in u.states){ %>\
-  case STATE_${state.name}:
-<% def firstFlag = true %>\
-<% for(t in state.outgoings){ %>\
-<% if(firstFlag){ firstFlag = false; } else {%>\
-    else
-<% } %>\
-    if(((event & ${t.event}) != 0) ${getGuardCode(t.guard)}){
-      // exit
-      ${state.exit}
-
-      //action
-      ${t.action}
-
-      this->state = STATE_${t.target.name};
-
-      //entry
-      ${t.target.entry}
-    }
-<% } %>\
-    break;
-<% } %>\
-  default:
-    break;
-  }
-}
-#endif
 #ifdef EXPERIMENTAL_USE
 void LEDTank::execState_for_experiment(){
     controller->getPosition(&distance, &angle);
@@ -196,4 +145,53 @@ void LEDTank::doTransition_for_experiment(unsigned long event){
     }
 }
 
+#else
+void ${u.name}::execState(){
+  switch(this->state){
+<% for(state in u.states){ %>\
+  case STATE_${state.name}:
+    ${state.doActivity}
+    break;
+<% } %>\
+  default:
+    break;
+  }
+}
+void ${u.name}::doTransition(unsigned long event){
+  this->_beforeState = this->state;
+
+  switch(this->state){
+  case _STATE_INITIAL:
+    this->state = STATE_${u.initialState};
+
+    //entry
+    ${u.initialState.entry}
+
+    break;  
+<% for(state in u.states){ %>\
+  case STATE_${state.name}:
+<% def firstFlag = true %>\
+<% for(t in state.outgoings){ %>\
+<% if(firstFlag){ firstFlag = false; } else {%>\
+    else
+<% } %>\
+    if(((event & ${t.event}) != 0) ${getGuardCode(t.guard)}){
+      // exit
+      ${state.exit}
+
+      //action
+      ${t.action}
+
+      this->state = STATE_${t.target.name};
+
+      //entry
+      ${t.target.entry}
+    }
+<% } %>\
+    break;
+<% } %>\
+  default:
+    break;
+  }
+}
 #endif

@@ -11,8 +11,8 @@
 #define STATE_LEFT ((unsigned long)4)
 #define STATE_RIGHT ((unsigned long)5)
 #define STATE_BACKWARD ((unsigned long)6)
-#endif
-#ifndef EXPERIMENTAL_USE
+
+#else
 #define _STATE_INITIAL 0x00000000
 <% def stateNo = 0x00000001 %>\
 <% for(state in u.states){ %>\
@@ -25,13 +25,12 @@ class PreController;
 class ${u.name}{
  public:
   ${u.name}(Controller *controller);
-#ifndef EXPERIMENTAL_USE
-  void execState();
-  void doTransition(unsigned long event);
-#endif
 #ifdef EXPERIMENTAL_USE
   void execState_for_experiment();
   void doTransition_for_experiment(unsigned long event);
+#else
+  void execState();
+  void doTransition(unsigned long event);
 #endif
   unsigned long _state;
 
@@ -39,18 +38,18 @@ class ${u.name}{
    Controller *controller;
    unsigned long _beforeState;
    unsigned long state;
-#ifndef EXPERIMENTAL_USE
-<% for(var in u.iclass.getAttributes()){%>\
-<% if(var.getAssociation() == null){%>\
-  ${var.getType()} ${var.getName()};
-<%}%>\
-<%}%>\
-#endif
 #ifdef EXPERIMENTAL_USE
   float distance;
   float angle;
   int cnt;
   int time;
+
+#else
+<% for(var in u.iclass.getAttributes()){%>\
+<% if(var.getAssociation() == null){%>\
+  ${var.getType()} ${var.getName()};
+<%}%>\
+<%}%>\
 #endif
 
 };

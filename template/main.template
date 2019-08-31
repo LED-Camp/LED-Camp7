@@ -52,20 +52,22 @@ int main(void){
      
 
 
-#ifndef EXPERIMENTAL_USE
-<% for(c in getClasses()){ %>\
-    ${u.getInstanceName(c)}->execState();
-<%}%>\
-<% for(c in getClasses()){ %>\
-    ${u.getInstanceName(c)}->doTransition(event->getEvent());
-<%}%>\
-#else
+#ifdef EXPERIMENTAL_USE
 <% for(c in getClasses()){ %>\
     ${u.getInstanceName(c)}->execState_for_experiment();
 <%}%>\
 <% for(c in getClasses()){ %>\
     ${u.getInstanceName(c)}->doTransition_for_experiment(event->getEvent());
 <%}%>\
+
+#else
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->execState();
+<%}%>\
+<% for(c in getClasses()){ %>\
+    ${u.getInstanceName(c)}->doTransition(event->getEvent());
+<%}%>\
+
 #endif
   }
   gettimeofday(&now, NULL);
