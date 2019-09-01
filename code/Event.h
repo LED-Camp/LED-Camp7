@@ -20,7 +20,6 @@ class Controller;
 #define E_CHANGE_DISTANCE ((unsigned long)0x00000010)
 #define E_CHANGE_ANGLE ((unsigned long)0x00000020)
 #define E_CHANGE_RANGING ((unsigned long)0x00000040)
-#define E_REACH ((unsigned long)0x00000080)
 
 #if 0
 #define TRUE (1)

@@ -162,13 +162,6 @@ int Event::updateEvent() {
     //     this->event &= ~E_CHANGE_ANGLE;
     // }
 
-    // if((controller->subscrTopic() == RET_SUCCESS) &&
-    //    (controller->dequeueMessage() != RET_FAILED)){
-    //      this->event |= E_REACH;
-    // }else{
-    //     this->event &= ~E_REACH;
-    // }
-
     printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d\n",
 	   distance, angle, rangingDistance, red, green, blue, left, center, right);
     this->distanceOld = distance;

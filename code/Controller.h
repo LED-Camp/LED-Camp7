@@ -7,7 +7,6 @@
 #include "RangingSensor.h"
 #include "TwinWheelDriver.h"
 #include "Position.h"
-#include "CNetMqtt.h"
 #include "LineSensor.h"
 
 
@@ -18,16 +17,11 @@ private:
     TwinWheelDriver *twinWheelDriver;
     ColorSensor *colorSensor;
     RangingSensor *rangingSensor;
-    CNetMqtt netMqtt;
     LineSensor *lineSensor;
-    Score *score;
-
-    enMsgId_t enMsg;
 
 protected:
     Controller(void);
     ~Controller(void);
-
 
 public:
     static Controller* _instance;
@@ -49,11 +43,6 @@ public:
 
     void getColorValue(uint16_t* red, uint16_t* green, uint16_t* blue, uint16_t* clear);
     
-    // Course系
-    void getNextScoreTable(int nextScoreTable[4]);
-    int subscrTopic(void);
-    int dequeueMessage(void);
-
 };
 
 #endif
