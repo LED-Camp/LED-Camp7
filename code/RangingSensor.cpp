@@ -86,9 +86,9 @@ float RangingSensor::getRanging()
 {
   VL53L0X_RangingMeasurementData_t rangingMeasurementData = {0};
 
-  VL53L0X_Error status = VL53L0X_ERROR_NONE;
+  //VL53L0X_Error status = VL53L0X_ERROR_NONE;
 
-  status = VL53L0X_PerformSingleRangingMeasurement(pm_device, &rangingMeasurementData);
+  //status = VL53L0X_PerformSingleRangingMeasurement(pm_device, &rangingMeasurementData);
   // printf("Measured distance: %i\n\n", rangingMeasurementData.RangeMilliMeter);
 
   return ((float)rangingMeasurementData.RangeMilliMeter / 10.0);

@@ -12,8 +12,6 @@ int main(void){
   struct timeval now;
   struct timeval old;
 
-  char c;
-
   Controller *controller;
   Event *event;
   
