@@ -23,8 +23,8 @@ class Controller;
 #define E_REACH ((unsigned long)0x00000080)
 #define E_CHANGE_LINE ((unsigned long)0x00000100)
 #define E_CHANGE_COLOR ((unsigned long)0x00000200)
-#define TRUE ((unsigned long)0xFFFFFFFF)
-#define FALSE ((unsigned long)0x00000000)
+#define E_TRUE ((unsigned long)0xFFFFFFFF)
+#define E_FALSE ((unsigned long)0x00000000)
 
 
 extern int kbhit(void);
