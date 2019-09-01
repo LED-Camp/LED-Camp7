@@ -32,10 +32,12 @@ void RangingSensor::Initialize()
   uint8_t VhvSettings;
   uint8_t PhaseCal;
 
+  
+
   printf ("1\n");
   pm_device->I2cDevAddr = 0x29;
   printf ("2\n");
-  pm_device->fd = VL53L0X_i2c_init("/dev/i2c-1", pm_device->I2cDevAddr);
+  pm_device->fd = VL53L0X_i2c_init((char*)"/dev/i2c-1", pm_device->I2cDevAddr);
 
   printf ("3\n");
   if (m_device.fd < 0)
