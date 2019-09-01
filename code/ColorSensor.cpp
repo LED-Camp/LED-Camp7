@@ -47,10 +47,10 @@ void ColorSensor::getColorValue(uint16_t* r, uint16_t* g, uint16_t* b, uint16_t*
 
 void ColorSensor::getColor(uint16_t red,  uint16_t green, uint16_t blue, uint16_t * color)
 {
-  uint16_t max_value = 0;
-  uint16_t colors[3] = {red*COLOR_SENSOR_RED_COFF / 100,
-                        green*COLOR_SENSOR_GREEN_COFF / 100,
-                        blue*COLOR_SENSOR_BLUE_COFF / 100};
+  double max_value = 0;
+  double colors[3] = {(double)red*COLOR_SENSOR_RED_COFF / 100,
+                      (double)green*COLOR_SENSOR_GREEN_COFF / 100,
+                      (double)blue*COLOR_SENSOR_BLUE_COFF / 100};
 
   for(int i = 0; i < 3; i++)
   {
