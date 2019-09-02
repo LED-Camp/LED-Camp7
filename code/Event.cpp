@@ -113,7 +113,7 @@ int Event::updateEvent() {
     controller->getPosition(&distance, &angle);
     absDistanceDiff = ABS_FLOAT(this->distanceOld - distance);
     absAngleDiff = ABS_FLOAT(this->angleOld - angle);
-    controller->getLineValue(&left, &center, &right);
+    controller->detectBlack(&left, &center, &right);
     controller->getColorValue(&red, &green, &blue, &clear);
     controller->getColor(red, green, blue, &color);
     lineSensor3bit = left + center*2 + right*4;

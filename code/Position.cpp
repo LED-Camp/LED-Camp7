@@ -91,6 +91,7 @@ void Position::reset(void) {
     countB = 0;
 }
 
+
 void Position::getPosition(float* distance, float* angle) {
     float l;
     float r;
@@ -99,6 +100,8 @@ void Position::getPosition(float* distance, float* angle) {
     
     l = countA * COUNT_TO_M * L_ENCODER_COFF/100.0;
     r = countB * COUNT_TO_M * R_ENCODER_COFF/100.0;
+    printf(">>>>>>>>>%f, %f\n", l, r);
+
 
     distanceTemp = (l + r) / 2.0;
 

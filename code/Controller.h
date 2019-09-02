@@ -29,14 +29,14 @@ public:
     static Controller* getInstance(void);
     Position *position;
     // Position系
-    void reset(void);
+    void positionReset(void);
     void getPosition(float* distance, float* angle);
 
     // twinWheelDriver系
     void changeDriveMode(Mode mode, int voltage_level);
 
     // LineSensor系
-    void getLineValue(bool* left, bool* center, bool* right);
+    void detectBlack(bool* left, bool* center, bool* right);
     
     // RangingSensor系
     float getRanging(void);
