@@ -1,5 +1,4 @@
 #include "Controller.h"
-#include "Score.h"
 #include "UserDefine.h"
 
 Controller* Controller::_instance = 0;
@@ -14,9 +13,6 @@ Controller* Controller::getInstance(void) {
 }
 
 Controller::Controller(void) {
-    // netMqtt = CNetMqtt::getInstance();
-    // netMqtt.initConnect("PLAYER", COURSE_IP_ADDR);
-
     position = Position::getInstance(17, 27);
     lineSensor = LineSensor::getInstance(10, 9, 11);
 
@@ -28,13 +24,9 @@ Controller::Controller(void) {
 
     twinWheelDriver = TwinWheelDriver::getInstance(13, 19, 5, 6);
 
-    
-
-    score = new Score();
 }
 
 Controller::~Controller(void) {
-    delete(score);
 }
 
 void Controller::reset(void) {
@@ -66,24 +58,4 @@ void Controller::getLineValue(bool* left, bool* center, bool* right){
 }
     
 
-void Controller::getNextScoreTable(int nextScoreTable[4]) {
-    char payload[255];
 
-    // メッセージ取得
-    netMqtt.getContent(payload,sizeof(payload));
-
-    // メッセージの解析
-    score->ParsePayload(payload);
-
-    // スコアの取得とリターン
-    score->getNextScoreTable(nextScoreTable);
-}
-
-//
-int Controller::subscrTopic(void) {
-    return netMqtt.subscrTopic("LED-Camp/point");
-}
-
-int Controller::dequeueMessage(void) {
-    return netMqtt.dequeueMessage(&enMsg);
-}
