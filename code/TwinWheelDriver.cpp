@@ -39,10 +39,10 @@ void TwinWheelDriver::changeDriveMode(Mode mode, int voltage_level, Position* po
         position->setDir(DIR_BACK, DIR_BACK);
     } else if (mode == CW) {
         motorL->pwmWrite(l);
-        motorR->pwmWrite(0);
+        motorR->pwmWrite(-r);
         position->setDir(DIR_FORWARD, DIR_STOP);
     } else if (mode == CCW) {
-        motorL->pwmWrite(0);
+        motorL->pwmWrite(-l);
         motorR->pwmWrite(r);
         position->setDir(DIR_STOP, DIR_FORWARD);
     }

@@ -185,6 +185,10 @@ int Event::updateEvent() {
     this->lineSensor3bitOld = lineSensor3bit;
     this->colorOld = color;
 
+    printf("distance=%f,angle=%f,ranging=%f,color_r=%d,color_g=%d,color_b=%d,line_l=%d,line_c=%d,line_r=%d,color=%d\n",
+    distance, angle, rangingDistance, red, green, blue, left, center, right, color);
+
+
     return 0;
 }
 
