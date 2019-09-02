@@ -2,6 +2,7 @@
 #include "Position.h"
 #include <wiringPi.h>
 #include <sys/time.h>
+#include "UserDefine.h"
 
 static int dirA;
 static int dirB;
@@ -96,8 +97,8 @@ void Position::getPosition(float* distance, float* angle) {
 
     float distanceTemp;
     
-    l = countA * COUNT_TO_M;
-    r = countB * COUNT_TO_M;
+    l = countA * COUNT_TO_M * L_ENCODER_COFF/100.0;
+    r = countB * COUNT_TO_M * R_ENCODER_COFF/100.0;
 
     distanceTemp = (l + r) / 2.0;
 
