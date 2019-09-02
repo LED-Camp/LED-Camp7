@@ -121,9 +121,9 @@ int Event::updateEvent() {
     
     
     if(lineSensor3bit != this->lineSensor3bitOld){
-        this->event |= E_CHANGE_LINE;
+        this->event |= E_CHANGE_AREA;
     }else{
-        this->event &= ~E_CHANGE_LINE;
+        this->event &= ~E_CHANGE_AREA;
     }
 
     if(rangingDistance != this->rangingDistanceOld){

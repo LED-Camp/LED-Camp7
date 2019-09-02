@@ -164,7 +164,7 @@ rangingDistance=controller->getRanging();
     controller->getPosition(&distance, &angle);
     break;
   case STATE_PUSH:
-    controller->getLineValue(&lineL,&lineC,&lineR);
+    controller->detectBlack(&lineL,&lineC,&lineR);
 controller->getPosition(&distance, &angle);
     break;
   case STATE_PLACE:
@@ -187,7 +187,7 @@ void LEDTank::doTransition(unsigned long event){
     //entry
     controller->changeDriveMode(STOP, 0);
 printf("STOP\n");
-controller->reset();
+controller->positionReset();
 
     break;  
   case STATE_SEARCH:
@@ -203,7 +203,7 @@ controller->reset();
       //entry
       controller->changeDriveMode(FORWARD, 70);
 printf("CLOSE\n");
-controller->reset();
+controller->positionReset();
     }
     break;
   case STATE_STOP:
@@ -237,7 +237,7 @@ printf("HOLD\n");
     }
     break;
   case STATE_HOLD:
-    if(((event & TRUE) != 0) ){
+    if(((event & E_TRUE) != 0) ){
       // exit
       sleep(1);
 
@@ -270,7 +270,7 @@ printf("PLACE\n");
     }
     break;
   case STATE_PLACE:
-    if(((event & TRUE) != 0) ){
+    if(((event & E_TRUE) != 0) ){
       // exit
       sleep(1);
 
@@ -297,7 +297,7 @@ printf("RETURN\n");
       //entry
       controller->changeDriveMode(STOP, 0);
 printf("STOP\n");
-controller->reset();
+controller->positionReset();
     }
     break;
   default:
