@@ -252,7 +252,8 @@ printf("PUSH\n");
     }
     break;
   case STATE_PUSH:
-    if(((event & E_CHANGE_LINE) != 0) && (
+    if(((event & E_CHANGE_AREA
+) != 0) && (
 this->lineC == 1 && 
 this->lineL == 1 && 
 this->lineR == 1)){
