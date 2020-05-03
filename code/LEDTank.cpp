@@ -52,7 +52,7 @@ void LEDTank::doTransition_for_experiment(unsigned long event){
         this->state = STATE_STOP;
 
         //entry
-        controller->reset();
+        controller->positionReset();
         controller->changeDriveMode(STOP, 0);
 
         printf("STOP\n");

@@ -17,7 +17,7 @@ OBJS_EX := $(SRCS:%=$(OBJDIR)/%_ex.o)
 
 INCLUDES	= -I../VL53L0X_rasp/platform/inc
 INCLUDES	+= -I../VL53L0X_1.0.2/Api/core/inc
-LIBS		= -lwiringPi -lpthread -lpaho-mqtt3c
+LIBS		= -lwiringPi -lpthread 
 LIBS		+= -lVL53L0X_Rasp
 
 .PHONY: production
